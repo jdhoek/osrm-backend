@@ -451,7 +451,7 @@ function bike_push_handler(profile,way,result,data)
   -- pushing bikes - if no other mode found
   if result.forward_mode == mode.inaccessible or result.backward_mode == mode.inaccessible or
     result.forward_speed == -1 or result.backward_speed == -1 then
-    if data.foot ~= 'no' then
+    if not profile.access_tag_blacklist[data.foot] then
       local push_forward_speed = nil
       local push_backward_speed = nil
 

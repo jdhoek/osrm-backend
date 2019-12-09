@@ -28,6 +28,19 @@ Feature: Bike - Accessability of different way types
             | primary    | -1     | pushing bike | cycling      |
             | pedestrian | -1     | pushing bike | pushing bike |
 
+    Scenario: Bike - Pushing bikes on roads with restricted access
+        Then routability should be
+            | highway    | oneway | foot         | bicycle  | forw         | backw        |
+            | primary    |        | yes          | dismount | pushing bike | pushing bike |
+            | primary    | yes    |              |          | cycling      | pushing bike |
+            | primary    | yes    | permissive   |          | cycling      | pushing bike |
+            | primary    | yes    | no           |          | cycling      |              |
+            | primary    | yes    | use_sidepath |          | cycling      |              |
+            | primary    | -1     |              |          | pushing bike | cycling      |
+            | primary    | -1     | permissive   |          | pushing bike | cycling      |
+            | primary    | -1     | no           |          |              | cycling      |
+            | primary    | -1     | use_sidepath |          |              | cycling      |
+
     @square
     Scenario: Bike - Push bikes on pedestrian areas
         Given the node map
